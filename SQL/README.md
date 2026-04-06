@@ -27,8 +27,6 @@ Send ' →
   Async / WAF blocks all? → OOB/OAST (see cheat sheet §6)
 ```
 
-*More categories coming: XSS, SSRF, authentication bypass, IDOR, etc.*
-
 ## Usage
 
 Quick-reference cheat sheets during security assessments, labs, or CTF competitions. Each file covers the full workflow from identification to exploitation, with multi-DB payloads and real-world tips.
