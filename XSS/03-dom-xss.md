@@ -40,6 +40,8 @@ postMessage              // cross-origin messages
 localStorage / sessionStorage  // if populated from URL
 ```
 
+**AngularJS special case:** If the page uses `ng-app` and reflects input inside the Angular scope, the source flows into a template expression — no traditional sink needed. `{{ }}` is evaluated as JS directly. See `09-angularjs-template-injection.md`.
+
 ---
 
 ## Common sinks

